@@ -24,8 +24,11 @@ import {
 } from './icons'
 import type { ProjectLink } from './data'
 
-function rerunViewerUrl(rrdUrl: string) {
-  return `https://app.rerun.io/version/${RERUN_VERSION}/?url=${encodeURIComponent(rrdUrl)}`
+function rerunViewerUrl(rrdUrl: string, renderer?: 'webgl' | 'webgpu') {
+  const base = `https://app.rerun.io/version/${RERUN_VERSION}/?url=${encodeURIComponent(rrdUrl)}`
+  // Force a single renderer: inside a cross-origin iframe WebGPU is blocked, and
+  // Rerun's automatic fallback to WebGL reuses the canvas → "canvas already in use".
+  return renderer ? `${base}&renderer=${renderer}` : base
 }
 
 function RerunModal({ rrdUrl, title, onClose }: { rrdUrl: string; title: string; onClose: () => void }) {
@@ -53,7 +56,7 @@ function RerunModal({ rrdUrl, title, onClose }: { rrdUrl: string; title: string;
               target="_blank"
               rel="noreferrer"
             >
-              <ExternalIcon /> Fullscreen
+              <ExternalIcon /> Open in new tab
             </a>
             <button type="button" className="modal-close" onClick={onClose} aria-label="Close demo">
               <CloseIcon />
@@ -62,13 +65,14 @@ function RerunModal({ rrdUrl, title, onClose }: { rrdUrl: string; title: string;
         </div>
         <iframe
           className="modal-frame"
-          src={rerunViewerUrl(rrdUrl)}
+          src={rerunViewerUrl(rrdUrl, 'webgl')}
           title={title}
-          allow="fullscreen"
+          allow="fullscreen; webgpu"
         />
         <p className="modal-note">
           Interactive Rerun viewer — press play in the timeline, scrub frames, and orbit the 3D
-          scene. First load may take a few seconds.
+          scene. First load may take a few seconds. If it doesn&apos;t render, use “Open in new
+          tab”.
         </p>
       </div>
     </div>
