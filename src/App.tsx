@@ -22,19 +22,31 @@ import {
   PlayIcon,
   CloseIcon,
 } from './icons'
-import type { ProjectLink } from './data'
+import type { Project, ProjectLink } from './data'
 
-function rerunViewerUrl(rrdUrl: string, renderer?: 'webgl' | 'webgpu') {
-  const base = `https://app.rerun.io/version/${RERUN_VERSION}/?url=${encodeURIComponent(rrdUrl)}`
-  // Force a single renderer: inside a cross-origin iframe WebGPU is blocked, and
-  // Rerun's automatic fallback to WebGL reuses the canvas → "canvas already in use".
-  return renderer ? `${base}&renderer=${renderer}` : base
+function rerunViewerUrl(rrdUrl: string) {
+  return `https://app.rerun.io/version/${RERUN_VERSION}/?url=${encodeURIComponent(rrdUrl)}`
 }
 
-function RerunModal({ rrdUrl, title, onClose }: { rrdUrl: string; title: string; onClose: () => void }) {
+type GalleryImage = { src: string; caption: string }
+
+function GalleryModal({
+  title,
+  images,
+  rrdUrl,
+  onClose,
+}: {
+  title: string
+  images: GalleryImage[]
+  rrdUrl?: string
+  onClose: () => void
+}) {
+  const [active, setActive] = useState(0)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
+      if (e.key === 'ArrowRight') setActive((i) => (i + 1) % images.length)
+      if (e.key === 'ArrowLeft') setActive((i) => (i - 1 + images.length) % images.length)
     }
     document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKey)
@@ -42,38 +54,40 @@ function RerunModal({ rrdUrl, title, onClose }: { rrdUrl: string; title: string;
       document.body.style.overflow = ''
       window.removeEventListener('keydown', onKey)
     }
-  }, [onClose])
+  }, [onClose, images.length])
 
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-head">
-          <span className="modal-title">{title}</span>
+          <span className="modal-title">{title} — Evaluation Results</span>
           <div className="modal-head-actions">
-            <a
-              className="project-link"
-              href={rerunViewerUrl(rrdUrl)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <ExternalIcon /> Open in new tab
-            </a>
-            <button type="button" className="modal-close" onClick={onClose} aria-label="Close demo">
+            {rrdUrl && (
+              <a className="project-link" href={rerunViewerUrl(rrdUrl)} target="_blank" rel="noreferrer">
+                <PlayIcon /> Interactive 3D viewer
+              </a>
+            )}
+            <button type="button" className="modal-close" onClick={onClose} aria-label="Close">
               <CloseIcon />
             </button>
           </div>
         </div>
-        <iframe
-          className="modal-frame"
-          src={rerunViewerUrl(rrdUrl, 'webgl')}
-          title={title}
-          allow="fullscreen; webgpu"
-        />
-        <p className="modal-note">
-          Interactive Rerun viewer — press play in the timeline, scrub frames, and orbit the 3D
-          scene. First load may take a few seconds. If it doesn&apos;t render, use “Open in new
-          tab”.
-        </p>
+        <div className="gallery-stage">
+          <img className="gallery-image" src={images[active].src} alt={images[active].caption} />
+        </div>
+        <p className="modal-note">{images[active].caption}</p>
+        <div className="gallery-thumbs">
+          {images.map((img, i) => (
+            <button
+              key={img.src}
+              type="button"
+              className={`gallery-thumb ${i === active ? 'active' : ''}`}
+              onClick={() => setActive(i)}
+            >
+              <img src={img.src} alt={img.caption} />
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -158,7 +172,7 @@ function Hero() {
 }
 
 function Projects() {
-  const [demo, setDemo] = useState<{ url: string; title: string } | null>(null)
+  const [demo, setDemo] = useState<Project | null>(null)
   return (
     <section id="projects" className="section">
       <div className="container">
@@ -190,16 +204,26 @@ function Projects() {
                     </span>
                   ))}
                 </div>
-                {(p.rerunRrd || (p.links && p.links.length > 0)) && (
+                {(p.gallery || p.rerunRrd || (p.links && p.links.length > 0)) && (
                   <div className="project-links">
-                    {p.rerunRrd && (
+                    {p.gallery && p.gallery.length > 0 && (
                       <button
                         type="button"
                         className="project-link project-link-accent"
-                        onClick={() => setDemo({ url: p.rerunRrd!, title: p.title })}
+                        onClick={() => setDemo(p)}
                       >
-                        <PlayIcon /> Interactive Demo
+                        <PlayIcon /> View Results
                       </button>
+                    )}
+                    {p.rerunRrd && (
+                      <a
+                        className="project-link"
+                        href={rerunViewerUrl(p.rerunRrd)}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <ExternalIcon /> Interactive 3D
+                      </a>
                     )}
                     {p.links?.map((l) => (
                       <a
@@ -227,8 +251,13 @@ function Projects() {
           </div>
         </Reveal>
       </div>
-      {demo && (
-        <RerunModal rrdUrl={demo.url} title={demo.title} onClose={() => setDemo(null)} />
+      {demo?.gallery && (
+        <GalleryModal
+          title={demo.title}
+          images={demo.gallery}
+          rrdUrl={demo.rerunRrd}
+          onClose={() => setDemo(null)}
+        />
       )}
     </section>
   )

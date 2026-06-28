@@ -44,8 +44,10 @@ export type Project = {
   tags: string[]
   highlight?: string
   links?: ProjectLink[]
-  // Raw URL to a Rerun .rrd recording; renders an embedded interactive viewer.
+  // Raw URL to a Rerun .rrd recording; opens the interactive viewer in a new tab.
   rerunRrd?: string
+  // Result images shown in an in-page gallery modal.
+  gallery?: { src: string; caption: string }[]
 }
 
 // Rerun web viewer version (must match the SDK that wrote the .rrd recordings).
@@ -60,6 +62,26 @@ export const aiProjects: Project[] = [
     highlight: 'Research',
     rerunRrd:
       'https://raw.githubusercontent.com/manuelapop/my-website/main/public/rerun/eval_viz_darko_test.rrd',
+    gallery: [
+      {
+        src: '/research/ade_trajectory_percentile_plot.png',
+        caption:
+          'ADE (Average Displacement Error) by prediction horizon — 5th/50th/95th percentile trajectories.',
+      },
+      {
+        src: '/research/fde_trajectory_percentile_plot.png',
+        caption:
+          'FDE (Final Displacement Error) by prediction horizon — 5th/50th/95th percentile trajectories.',
+      },
+      {
+        src: '/research/ade_pose_percentile_plot.png',
+        caption: 'ADE per-pose error percentiles across the prediction horizon.',
+      },
+      {
+        src: '/research/fde_pose_percentile_plot.png',
+        caption: 'FDE per-pose error percentiles across the prediction horizon.',
+      },
+    ],
   },
   {
     title: 'Retrieval-Augmented Generation Chat System',
