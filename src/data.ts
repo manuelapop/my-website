@@ -44,24 +44,17 @@ export type Project = {
   tags: string[]
   highlight?: string
   links?: ProjectLink[]
-  // Raw URL to a Rerun .rrd recording; opens the interactive viewer in a new tab.
-  rerunRrd?: string
   // Result images shown in an in-page gallery modal.
   gallery?: { src: string; caption: string }[]
 }
-
-// Rerun web viewer version (must match the SDK that wrote the .rrd recordings).
-export const RERUN_VERSION = '0.33.0'
 
 export const aiProjects: Project[] = [
   {
     title: 'Optimization Research — UT Austin',
     blurb:
-      'Built optimization workflows for the Living and Working with Robots Lab, training and tuning neural networks at scale with reproducible experiment tracking. The interactive demo shows a Rerun visualization of human motion-prediction evaluation.',
+      'Built optimization workflows for the Living and Working with Robots Lab, training and tuning neural networks at scale with reproducible experiment tracking. View the human motion-prediction evaluation results (ADE/FDE error percentiles).',
     tags: ['PyTorch', 'Optuna', 'Ray Tune', 'Hydra', 'Rerun'],
     highlight: 'Research',
-    rerunRrd:
-      'https://raw.githubusercontent.com/manuelapop/my-website/main/public/rerun/eval_viz_darko_test.rrd',
     gallery: [
       {
         src: '/research/ade_trajectory_percentile_plot.png',

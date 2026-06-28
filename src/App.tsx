@@ -6,7 +6,6 @@ import {
   skillGroups,
   experience,
   education,
-  RERUN_VERSION,
 } from './data'
 import { useReveal, useScrolled, useTyped } from './hooks'
 import {
@@ -24,21 +23,15 @@ import {
 } from './icons'
 import type { Project, ProjectLink } from './data'
 
-function rerunViewerUrl(rrdUrl: string) {
-  return `https://app.rerun.io/version/${RERUN_VERSION}/?url=${encodeURIComponent(rrdUrl)}`
-}
-
 type GalleryImage = { src: string; caption: string }
 
 function GalleryModal({
   title,
   images,
-  rrdUrl,
   onClose,
 }: {
   title: string
   images: GalleryImage[]
-  rrdUrl?: string
   onClose: () => void
 }) {
   const [active, setActive] = useState(0)
@@ -62,11 +55,6 @@ function GalleryModal({
         <div className="modal-head">
           <span className="modal-title">{title} — Evaluation Results</span>
           <div className="modal-head-actions">
-            {rrdUrl && (
-              <a className="project-link" href={rerunViewerUrl(rrdUrl)} target="_blank" rel="noreferrer">
-                <PlayIcon /> Interactive 3D viewer
-              </a>
-            )}
             <button type="button" className="modal-close" onClick={onClose} aria-label="Close">
               <CloseIcon />
             </button>
@@ -204,7 +192,7 @@ function Projects() {
                     </span>
                   ))}
                 </div>
-                {(p.gallery || p.rerunRrd || (p.links && p.links.length > 0)) && (
+                {(p.gallery || (p.links && p.links.length > 0)) && (
                   <div className="project-links">
                     {p.gallery && p.gallery.length > 0 && (
                       <button
@@ -214,16 +202,6 @@ function Projects() {
                       >
                         <PlayIcon /> View Results
                       </button>
-                    )}
-                    {p.rerunRrd && (
-                      <a
-                        className="project-link"
-                        href={rerunViewerUrl(p.rerunRrd)}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
-                        <ExternalIcon /> Interactive 3D
-                      </a>
                     )}
                     {p.links?.map((l) => (
                       <a
@@ -252,12 +230,7 @@ function Projects() {
         </Reveal>
       </div>
       {demo?.gallery && (
-        <GalleryModal
-          title={demo.title}
-          images={demo.gallery}
-          rrdUrl={demo.rerunRrd}
-          onClose={() => setDemo(null)}
-        />
+        <GalleryModal title={demo.title} images={demo.gallery} onClose={() => setDemo(null)} />
       )}
     </section>
   )
