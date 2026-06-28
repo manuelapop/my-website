@@ -79,7 +79,7 @@ export const aiProjects: Project[] = [
   {
     title: 'Retrieval-Augmented Generation Chat System',
     blurb:
-      'An AI chat system that answers questions over a document set using semantic retrieval, document chunking, embeddings, FAISS vector search, and Hugging Face models.',
+      'An AI chat system that answers questions grounded in a document set. Documents are chunked with overlap and embedded with sentence-transformers, then a FAISS vector index retrieves the most relevant passages for each question. A Hugging Face language model generates the answer from only those retrieved passages and cites its sources, and a similarity threshold makes it reply "I don\'t know" instead of hallucinating when the answer isn\'t in the data. The live demo answers questions about my background and projects.',
     tags: ['RAG', 'Embeddings', 'FAISS', 'Hugging Face', 'NLP'],
     highlight: 'LLM / GenAI',
     links: [
