@@ -67,3 +67,18 @@ export const SparkIcon = ({ className }: P) => (
     <path d="M12 3v4m0 10v4M5 12H1m22 0h-4M6.3 6.3 8 8m8 8 1.7 1.7M6.3 17.7 8 16m8-8 1.7-1.7" />
   </svg>
 )
+
+export const PaperIcon = ({ className }: P) => (
+  <svg className={className} {...base} aria-hidden="true">
+    <path d="M6 2h8l4 4v16H6z" />
+    <path d="M14 2v4h4" />
+    <path d="M9 12h6M9 16h6M9 8h2" />
+  </svg>
+)
+
+export const ExternalIcon = ({ className }: P) => (
+  <svg className={className} {...base} aria-hidden="true">
+    <path d="M14 4h6v6m0-6L10 14" />
+    <path d="M20 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h4" />
+  </svg>
+)

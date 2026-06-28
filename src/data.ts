@@ -31,12 +31,19 @@ export const githubUrl = `https://github.com/${profile.github}`
 // AI Projects & Research — the centerpiece of the site
 // ---------------------------------------------------------------------------
 
+export type ProjectLink = {
+  label: string
+  url: string
+  // 'github' | 'demo' | 'paper' — used to pick an icon
+  kind?: 'github' | 'demo' | 'paper'
+}
+
 export type Project = {
   title: string
   blurb: string
   tags: string[]
   highlight?: string
-  link?: string
+  links?: ProjectLink[]
 }
 
 export const aiProjects: Project[] = [
@@ -50,9 +57,10 @@ export const aiProjects: Project[] = [
   {
     title: 'Retrieval-Augmented Generation Chat System',
     blurb:
-      'An AI chat system that answers questions over clinical notes using semantic retrieval, document chunking, embeddings, vector search, and Hugging Face models.',
-    tags: ['RAG', 'Embeddings', 'Vector Search', 'Hugging Face', 'NLP'],
+      'An AI chat system that answers questions over a document set using semantic retrieval, document chunking, embeddings, FAISS vector search, and Hugging Face models.',
+    tags: ['RAG', 'Embeddings', 'FAISS', 'Hugging Face', 'NLP'],
     highlight: 'LLM / GenAI',
+    links: [{ label: 'Code', url: 'https://github.com/manuelapop/RAG-chat', kind: 'github' }],
   },
   {
     title: 'Hospital Flow AI Agent',
@@ -60,13 +68,19 @@ export const aiProjects: Project[] = [
       'An agent-based AI system that predicts ICU escalation risk and optimizes patient flow using structured clinical data.',
     tags: ['Agentic AI', 'Prediction', 'Healthcare', 'Python'],
     highlight: 'Agents',
+    links: [
+      { label: 'Code', url: 'https://github.com/manuelapop/hospital-flow-agent', kind: 'github' },
+    ],
   },
   {
-    title: 'Health Indicator Prediction',
+    title: 'Health Indicator Prediction from Lifestyle & Biometric Data',
     blurb:
-      'End-to-end pipeline predicting lifestyle-driven health outcomes. Trained recurrent neural network and tree-based classifiers, built visualizations, and interpreted results. Published on EngrXiv.',
+      'End-to-end machine learning pipeline predicting lifestyle-driven health outcomes. Trained a recurrent neural network and tree-based classifiers, built visualizations, and interpreted results. Peer-published on EngrXiv.',
     tags: ['RNN', 'Classification', 'Pandas', 'Published'],
     highlight: 'Published Research',
+    links: [
+      { label: 'Read Paper', url: 'https://engrxiv.org/preprint/view/6038/10000', kind: 'paper' },
+    ],
   },
 ]
 

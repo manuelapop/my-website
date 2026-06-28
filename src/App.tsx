@@ -16,7 +16,16 @@ import {
   DownloadIcon,
   ArrowIcon,
   SparkIcon,
+  PaperIcon,
+  ExternalIcon,
 } from './icons'
+import type { ProjectLink } from './data'
+
+function ProjectLinkIcon({ kind }: { kind?: ProjectLink['kind'] }) {
+  if (kind === 'github') return <GitHubIcon />
+  if (kind === 'paper') return <PaperIcon />
+  return <ExternalIcon />
+}
 
 function Reveal({ children, className }: { children: ReactNode; className?: string }) {
   const ref = useReveal<HTMLDivElement>()
@@ -122,6 +131,22 @@ function Projects() {
                     </span>
                   ))}
                 </div>
+                {p.links && p.links.length > 0 && (
+                  <div className="project-links">
+                    {p.links.map((l) => (
+                      <a
+                        key={l.url}
+                        className="project-link"
+                        href={l.url}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <ProjectLinkIcon kind={l.kind} />
+                        {l.label}
+                      </a>
+                    ))}
+                  </div>
+                )}
               </article>
             </Reveal>
           ))}
