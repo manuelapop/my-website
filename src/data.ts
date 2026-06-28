@@ -105,7 +105,7 @@ export const aiProjects: Project[] = [
   {
     title: 'Health Indicator Prediction from Lifestyle & Biometric Data',
     blurb:
-      'End-to-end machine learning pipeline predicting lifestyle-driven health outcomes. Trained a recurrent neural network and tree-based classifiers, built visualizations, and interpreted results. Peer-published on EngrXiv.',
+      'End-to-end machine learning pipeline predicting lifestyle-driven health outcomes from lifestyle and biometric inputs. I handled the full workflow — data cleaning and feature engineering, model training, evaluation, and interpretation. I trained and compared a recurrent neural network against tree-based classification models, tuned them for performance, and built visualizations to analyze feature relationships and explain the drivers behind each prediction. The study was peer-published on EngrXiv.',
     tags: ['RNN', 'Classification', 'Pandas', 'Published'],
     highlight: 'Published Research',
     links: [
