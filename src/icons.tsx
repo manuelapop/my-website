@@ -82,3 +82,15 @@ export const ExternalIcon = ({ className }: P) => (
     <path d="M20 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h4" />
   </svg>
 )
+
+export const PlayIcon = ({ className }: P) => (
+  <svg className={className} {...base} aria-hidden="true">
+    <path d="M6 4.5v15l13-7.5z" fill="currentColor" stroke="none" />
+  </svg>
+)
+
+export const CloseIcon = ({ className }: P) => (
+  <svg className={className} {...base} aria-hidden="true">
+    <path d="M6 6l12 12M18 6 6 18" />
+  </svg>
+)

@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import {
   profile,
   githubUrl,
@@ -6,6 +6,7 @@ import {
   skillGroups,
   experience,
   education,
+  RERUN_VERSION,
 } from './data'
 import { useReveal, useScrolled, useTyped } from './hooks'
 import {
@@ -18,8 +19,61 @@ import {
   SparkIcon,
   PaperIcon,
   ExternalIcon,
+  PlayIcon,
+  CloseIcon,
 } from './icons'
 import type { ProjectLink } from './data'
+
+function rerunViewerUrl(rrdUrl: string) {
+  return `https://app.rerun.io/version/${RERUN_VERSION}/?url=${encodeURIComponent(rrdUrl)}`
+}
+
+function RerunModal({ rrdUrl, title, onClose }: { rrdUrl: string; title: string; onClose: () => void }) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose()
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [onClose])
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-head">
+          <span className="modal-title">{title}</span>
+          <div className="modal-head-actions">
+            <a
+              className="project-link"
+              href={rerunViewerUrl(rrdUrl)}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ExternalIcon /> Fullscreen
+            </a>
+            <button type="button" className="modal-close" onClick={onClose} aria-label="Close demo">
+              <CloseIcon />
+            </button>
+          </div>
+        </div>
+        <iframe
+          className="modal-frame"
+          src={rerunViewerUrl(rrdUrl)}
+          title={title}
+          allow="fullscreen"
+        />
+        <p className="modal-note">
+          Interactive Rerun viewer — press play in the timeline, scrub frames, and orbit the 3D
+          scene. First load may take a few seconds.
+        </p>
+      </div>
+    </div>
+  )
+}
 
 function ProjectLinkIcon({ kind }: { kind?: ProjectLink['kind'] }) {
   if (kind === 'github') return <GitHubIcon />
@@ -100,6 +154,7 @@ function Hero() {
 }
 
 function Projects() {
+  const [demo, setDemo] = useState<{ url: string; title: string } | null>(null)
   return (
     <section id="projects" className="section">
       <div className="container">
@@ -131,9 +186,18 @@ function Projects() {
                     </span>
                   ))}
                 </div>
-                {p.links && p.links.length > 0 && (
+                {(p.rerunRrd || (p.links && p.links.length > 0)) && (
                   <div className="project-links">
-                    {p.links.map((l) => (
+                    {p.rerunRrd && (
+                      <button
+                        type="button"
+                        className="project-link project-link-accent"
+                        onClick={() => setDemo({ url: p.rerunRrd!, title: p.title })}
+                      >
+                        <PlayIcon /> Interactive Demo
+                      </button>
+                    )}
+                    {p.links?.map((l) => (
                       <a
                         key={l.url}
                         className="project-link"
@@ -159,6 +223,9 @@ function Projects() {
           </div>
         </Reveal>
       </div>
+      {demo && (
+        <RerunModal rrdUrl={demo.url} title={demo.title} onClose={() => setDemo(null)} />
+      )}
     </section>
   )
 }

@@ -44,15 +44,22 @@ export type Project = {
   tags: string[]
   highlight?: string
   links?: ProjectLink[]
+  // Raw URL to a Rerun .rrd recording; renders an embedded interactive viewer.
+  rerunRrd?: string
 }
+
+// Rerun web viewer version (must match the SDK that wrote the .rrd recordings).
+export const RERUN_VERSION = '0.33.0'
 
 export const aiProjects: Project[] = [
   {
     title: 'Optimization Research — UT Austin',
     blurb:
-      'Built optimization workflows for the Living and Working with Robots Lab, training and tuning neural networks at scale with reproducible experiment tracking.',
-    tags: ['PyTorch', 'Optuna', 'Ray Tune', 'Hydra', 'TensorBoard'],
+      'Built optimization workflows for the Living and Working with Robots Lab, training and tuning neural networks at scale with reproducible experiment tracking. The interactive demo shows a Rerun visualization of human motion-prediction evaluation.',
+    tags: ['PyTorch', 'Optuna', 'Ray Tune', 'Hydra', 'Rerun'],
     highlight: 'Research',
+    rerunRrd:
+      'https://raw.githubusercontent.com/manuelapop/my-website/main/public/rerun/eval_viz_darko_test.rrd',
   },
   {
     title: 'Retrieval-Augmented Generation Chat System',
