@@ -52,9 +52,9 @@ export const aiProjects: Project[] = [
   {
     title: 'Optimization Research — UT Austin',
     blurb:
-      'Built optimization workflows for the Living and Working with Robots Lab, training and tuning neural networks at scale with reproducible experiment tracking. View the human motion-prediction evaluation results (ADE/FDE error percentiles).',
+      'Ongoing research with the Living and Working with Robots Lab on human motion prediction. I build optimization workflows that train and tune neural networks at scale — automated hyperparameter search with Optuna and Ray Tune, reproducible configuration with Hydra, and experiment tracking on TACC high-performance compute. Models are evaluated with ADE/FDE displacement-error metrics across prediction horizons and visualized in 3D with Rerun. This work is in progress, with a thesis paper to be published.',
     tags: ['PyTorch', 'Optuna', 'Ray Tune', 'Hydra', 'Rerun'],
-    highlight: 'Research',
+    highlight: 'Research · In Progress',
     gallery: [
       {
         src: '/research/ade_trajectory_percentile_plot.png',
