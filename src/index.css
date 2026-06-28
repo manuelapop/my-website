@@ -417,16 +417,6 @@ button.project-link {
   cursor: pointer;
   font-family: inherit;
 }
-.project-link-accent {
-  background: var(--grad);
-  border-color: transparent;
-  color: #fff;
-}
-.project-link-accent:hover {
-  color: #fff;
-  border-color: transparent;
-  box-shadow: 0 10px 26px -12px rgba(236, 72, 153, 0.7);
-}
 
 /* ===========================================================================
    Modal (interactive demo viewer)

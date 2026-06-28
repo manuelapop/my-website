@@ -197,7 +197,7 @@ function Projects() {
                     {p.gallery && p.gallery.length > 0 && (
                       <button
                         type="button"
-                        className="project-link project-link-accent"
+                        className="project-link"
                         onClick={() => setDemo(p)}
                       >
                         <PlayIcon /> View Results
