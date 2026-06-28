@@ -90,8 +90,8 @@ export const aiProjects: Project[] = [
   {
     title: 'Hospital Flow AI Agent',
     blurb:
-      'An agent-based AI system that predicts ICU escalation risk and optimizes patient flow using structured clinical data.',
-    tags: ['Agentic AI', 'Prediction', 'Healthcare', 'Python'],
+      'An agent-based clinical decision-support demo that scores patient escalation risk from vitals — heart rate, respiratory rate, SpO₂, blood pressure, temperature, glucose, and BMI. A scikit-learn gradient-boosting model returns a risk probability with Low/Medium/High bands and surfaces the factors deviating most from the training cohort, while an optional LLM layer turns the prediction into a plain-language operational summary (monitor / reassess / escalate) to support patient-flow triage. The live demo trains on synthetic data on first launch — no real patient data, educational use only.',
+    tags: ['Agentic AI', 'scikit-learn', 'LLM', 'Healthcare', 'Python'],
     highlight: 'Agents',
     links: [
       {
