@@ -53,7 +53,7 @@ function GalleryModal({
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal" onClick={(e) => e.stopPropagation()}>
         <div className="modal-head">
-          <span className="modal-title">{title} — Evaluation Results</span>
+          <span className="modal-title">{title}: Evaluation Results</span>
           <div className="modal-head-actions">
             <button type="button" className="modal-close" onClick={onClose} aria-label="Close">
               <CloseIcon />

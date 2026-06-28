@@ -1,6 +1,6 @@
 // ---------------------------------------------------------------------------
 // Single source of truth for all portfolio content.
-// Edit values here to update the site — no component changes needed.
+// Edit values here to update the site; no component changes needed.
 // ---------------------------------------------------------------------------
 
 export const profile = {
@@ -15,7 +15,7 @@ export const profile = {
   linkedin: 'https://www.linkedin.com/in/manuela-anne-marie-pop-096146a4',
   resumePath: '/Manuela_Pop_Resume.pdf',
   summary:
-    'Experienced software engineer building AI-enabled systems — retrieval-augmented generation, agentic workflows, LLM tool integration, ML pipelines, and optimization systems. I combine 15+ years of platform engineering leadership with current graduate work in artificial intelligence to deliver scalable, production-oriented AI applications.',
+    'Experienced software engineer building AI-enabled systems: retrieval-augmented generation, agentic workflows, LLM tool integration, ML pipelines, and optimization systems. I combine 15+ years of platform engineering leadership with current graduate work in artificial intelligence to deliver scalable, production-oriented AI applications.',
   // Short punchy lines that rotate / display in the hero
   taglines: [
     'Retrieval-Augmented Generation',
@@ -28,13 +28,13 @@ export const profile = {
 export const githubUrl = `https://github.com/${profile.github}`
 
 // ---------------------------------------------------------------------------
-// AI Projects & Research — the centerpiece of the site
+// AI Projects & Research (the centerpiece of the site)
 // ---------------------------------------------------------------------------
 
 export type ProjectLink = {
   label: string
   url: string
-  // 'github' | 'demo' | 'paper' — used to pick an icon
+  // 'github' | 'demo' | 'paper' (used to pick an icon)
   kind?: 'github' | 'demo' | 'paper'
 }
 
@@ -50,21 +50,21 @@ export type Project = {
 
 export const aiProjects: Project[] = [
   {
-    title: 'Optimization Research — UT Austin',
+    title: 'Optimization Research, UT Austin',
     blurb:
-      'Ongoing research with the Living and Working with Robots Lab on human motion prediction. I build optimization workflows that train and tune neural networks at scale — automated hyperparameter search with Optuna and Ray Tune, reproducible configuration with Hydra, and experiment tracking on TACC high-performance compute. Models are evaluated with ADE/FDE displacement-error metrics across prediction horizons and visualized in 3D with Rerun. This work is in progress, with a thesis paper to be published.',
+      'Ongoing research with the Living and Working with Robots Lab on human motion prediction. I build optimization workflows that train and tune neural networks at scale: automated hyperparameter search with Optuna and Ray Tune, reproducible configuration with Hydra, and experiment tracking on TACC high-performance compute. Models are evaluated with ADE/FDE displacement-error metrics across prediction horizons and visualized in 3D with Rerun. This work is in progress, with a thesis paper to be published.',
     tags: ['PyTorch', 'Optuna', 'Ray Tune', 'Hydra', 'Rerun'],
     highlight: 'Research · In Progress',
     gallery: [
       {
         src: '/research/ade_trajectory_percentile_plot.png',
         caption:
-          'ADE (Average Displacement Error) by prediction horizon — 5th/50th/95th percentile trajectories.',
+          'ADE (Average Displacement Error) by prediction horizon: 5th/50th/95th percentile trajectories.',
       },
       {
         src: '/research/fde_trajectory_percentile_plot.png',
         caption:
-          'FDE (Final Displacement Error) by prediction horizon — 5th/50th/95th percentile trajectories.',
+          'FDE (Final Displacement Error) by prediction horizon: 5th/50th/95th percentile trajectories.',
       },
       {
         src: '/research/ade_pose_percentile_plot.png',
@@ -90,7 +90,7 @@ export const aiProjects: Project[] = [
   {
     title: 'Hospital Flow AI Agent',
     blurb:
-      'An agent-based clinical decision-support demo that scores patient escalation risk from vitals — heart rate, respiratory rate, SpO₂, blood pressure, temperature, glucose, and BMI. A scikit-learn gradient-boosting model returns a risk probability with Low/Medium/High bands and surfaces the factors deviating most from the training cohort, while an optional LLM layer turns the prediction into a plain-language operational summary (monitor / reassess / escalate) to support patient-flow triage. The live demo trains on synthetic data on first launch — no real patient data, educational use only.',
+      'An agent-based clinical decision-support demo that scores patient escalation risk from vitals such as heart rate, respiratory rate, SpO₂, blood pressure, temperature, glucose, and BMI. A scikit-learn gradient-boosting model returns a risk probability with Low/Medium/High bands and surfaces the factors deviating most from the training cohort, while an optional LLM layer turns the prediction into a plain-language operational summary (monitor / reassess / escalate) to support patient-flow triage. The live demo trains on synthetic data on first launch, with no real patient data, for educational use only.',
     tags: ['Agentic AI', 'scikit-learn', 'LLM', 'Healthcare', 'Python'],
     highlight: 'Agents',
     links: [
@@ -105,7 +105,7 @@ export const aiProjects: Project[] = [
   {
     title: 'Health Indicator Prediction from Lifestyle & Biometric Data',
     blurb:
-      'End-to-end machine learning pipeline predicting lifestyle-driven health outcomes from lifestyle and biometric inputs. I handled the full workflow — data cleaning and feature engineering, model training, evaluation, and interpretation. I trained and compared a recurrent neural network against tree-based classification models, tuned them for performance, and built visualizations to analyze feature relationships and explain the drivers behind each prediction. The study was peer-published on EngrXiv.',
+      'End-to-end machine learning pipeline predicting lifestyle-driven health outcomes from lifestyle and biometric inputs. I handled the full workflow: data cleaning and feature engineering, model training, evaluation, and interpretation. I trained and compared a recurrent neural network against tree-based classification models, tuned them for performance, and built visualizations to analyze feature relationships and explain the drivers behind each prediction. The study was peer-published on EngrXiv.',
     tags: ['RNN', 'Classification', 'Pandas', 'Published'],
     highlight: 'Published Research',
     links: [
