@@ -12,7 +12,7 @@ export const profile = {
   phone: '971-487-2147',
   // GitHub username used to build the profile link.
   github: 'manuelapop',
-  linkedin: 'https://www.linkedin.com/in/manuela-anne-marie-pop-096146a4',
+  linkedin: 'https://www.linkedin.com/in/manuelapop/',
   resumePath: '/Manuela_Pop_Resume.pdf',
   summary:
     'Experienced software engineer building AI-enabled systems: retrieval-augmented generation, agentic workflows, LLM tool integration, ML pipelines, and optimization systems. I combine 15+ years of platform engineering leadership with current graduate work in artificial intelligence to deliver scalable, production-oriented AI applications.',
