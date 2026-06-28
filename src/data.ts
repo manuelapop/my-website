@@ -60,7 +60,10 @@ export const aiProjects: Project[] = [
       'An AI chat system that answers questions over a document set using semantic retrieval, document chunking, embeddings, FAISS vector search, and Hugging Face models.',
     tags: ['RAG', 'Embeddings', 'FAISS', 'Hugging Face', 'NLP'],
     highlight: 'LLM / GenAI',
-    links: [{ label: 'Code', url: 'https://github.com/manuelapop/RAG-chat', kind: 'github' }],
+    links: [
+      { label: 'Live Demo', url: 'https://huggingface.co/spaces/manupop99/rag-chat', kind: 'demo' },
+      { label: 'Code', url: 'https://github.com/manuelapop/RAG-chat', kind: 'github' },
+    ],
   },
   {
     title: 'Hospital Flow AI Agent',
@@ -69,6 +72,11 @@ export const aiProjects: Project[] = [
     tags: ['Agentic AI', 'Prediction', 'Healthcare', 'Python'],
     highlight: 'Agents',
     links: [
+      {
+        label: 'Live Demo',
+        url: 'https://huggingface.co/spaces/manupop99/hospital-flow-agent',
+        kind: 'demo',
+      },
       { label: 'Code', url: 'https://github.com/manuelapop/hospital-flow-agent', kind: 'github' },
     ],
   },
